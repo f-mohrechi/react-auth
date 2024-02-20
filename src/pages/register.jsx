@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { TextField, Button, Title } from "../components";
+import { TextField, Button, Title, ALink } from "../components";
 import { register } from "../services/auth";
 import { FiMail, FiLock, FiUser } from "react-icons/fi";
 
@@ -74,6 +74,10 @@ function Register() {
           />
           <div className="mt-3 flex justify-center">
             <Button type={"submit"} text={"Register"} />
+          </div>
+
+          <div className="mt-3">
+            <ALink text={"Already have an account? Login"} link={"/login"} />
           </div>
         </form>
       </div>
