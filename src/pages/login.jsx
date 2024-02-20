@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { TextField, Button, Title, ALink } from "../components";
-import { register } from "../services/auth";
+import { login } from "../services/auth";
 import { FiLock, FiUser } from "react-icons/fi";
 
 function Login() {
@@ -34,9 +34,13 @@ function Login() {
       setError({});
     }
 
-    // register(data).then((res) => {
-    //   console.log("result", res);
-    // });
+    login(data).then((res) => {
+      if (res.status === 200) {
+        console.log("Login successful", res.user);
+      } else {
+        console.log("Login failed", res.message);
+      }
+    });
   };
 
   return (
