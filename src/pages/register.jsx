@@ -42,7 +42,7 @@ function Register() {
   };
 
   return (
-    <div className="bg-sky-100 flex justify-center items-center h-screen">
+    <div className="bg-sky-100 flex justify-center items-center h-screen px-5">
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-4 p-4 bg-white rounded-lg shadow-lg w-96"
@@ -71,8 +71,9 @@ function Register() {
           placeholder=" Password"
           icon={<FiLock />}
         />
-
-        <Button type={"submit"} text={"Register"} />
+        <div className="mt-3 flex justify-center">
+          <Button type={"submit"} text={"Register"} />
+        </div>
       </form>
     </div>
   );
