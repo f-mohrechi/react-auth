@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import TextField from "../components/TextField";
+import { TextField, Button } from "../components";
 import { register } from "../services/auth";
 
 function Register() {
@@ -58,9 +58,7 @@ function Register() {
           placeholder=" Password"
         />
 
-        <button>
-          <span>Sign In</span>
-        </button>
+        <Button type={"submit"} text={"Register"} />
       </form>
     </div>
   );
