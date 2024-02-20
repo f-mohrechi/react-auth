@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { TextField, Button } from "../components";
 import { register } from "../services/auth";
+import { FiMail, FiLock, FiUser } from "react-icons/fi";
 
 function Register() {
   const usernameRef = useRef();
@@ -12,7 +13,7 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
-      name: usernameRef.current.value,
+      username: usernameRef.current.value,
       email: emailRef.current.value,
       password: passwordRef.current.value,
     };
@@ -30,16 +31,13 @@ function Register() {
 
     if (Object.keys(errors).length > 0) {
       setError(errors);
-
       return;
     } else {
       setError({});
     }
 
-    console.log(data, "data");
-
     register(data).then((res) => {
-      console.log(res);
+      console.log("result", res);
     });
   };
 
@@ -49,13 +47,29 @@ function Register() {
         onSubmit={handleSubmit}
         className="flex flex-col gap-4 p-4 bg-white rounded-lg shadow-lg w-96"
       >
-        <TextField ref={usernameRef} type="text" placeholder=" name" />
-        <TextField ref={emailRef} type="text" placeholder=" username" />
         <TextField
+          label={"username"}
+          error={error["username"]}
+          ref={usernameRef}
+          type="text"
+          placeholder=" username"
+          icon={<FiUser />}
+        />
+        <TextField
+          label={"email"}
+          error={error["email"]}
+          ref={emailRef}
+          type="text"
+          placeholder=" email"
+          icon={<FiMail />}
+        />
+        <TextField
+          label={"password"}
           error={error["password"]}
           ref={passwordRef}
-          type="text"
+          type="password"
           placeholder=" Password"
+          icon={<FiLock />}
         />
 
         <Button type={"submit"} text={"Register"} />
