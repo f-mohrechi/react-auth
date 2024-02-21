@@ -2,8 +2,7 @@
 
 ## This is my practice to learn React.js, and I am currently trying to implement authentication using React. I plan on adding additional features and libraries incrementally.
 
-### I am using json server, so please check [json-server](https://github.com/typicode/json-server) before starting the project.
-
+I am hosting my backend on a local server. You can find its code at https://github.com/f-mohrechi/back-auth.
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
