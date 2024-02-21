@@ -14,7 +14,7 @@ function Register() {
     e.preventDefault();
     const data = {
       username: usernameRef.current.value,
-      email: emailRef.current.value,
+      // email: emailRef.current.value,
       password: passwordRef.current.value,
     };
 
@@ -37,7 +37,7 @@ function Register() {
     }
 
     register(data).then((res) => {
-      console.log("result", res);
+      console.log("result", res.config.data);
     });
   };
 
@@ -56,14 +56,14 @@ function Register() {
             placeholder=" username"
             icon={<FiUser />}
           />
-          <TextField
+          {/* <TextField
             label={"email"}
             error={error["email"]}
             ref={emailRef}
             type="text"
             placeholder=" email"
             icon={<FiMail />}
-          />
+          /> */}
           <TextField
             label={"password"}
             error={error["password"]}

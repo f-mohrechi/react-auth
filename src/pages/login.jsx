@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { TextField, Button, Title, ALink } from "../components";
 import { login } from "../services/auth";
 import { FiLock, FiUser } from "react-icons/fi";
+import toastConfig from "../configs/ToastConfig";
 
 function Login() {
   const usernameRef = useRef();
@@ -34,13 +35,25 @@ function Login() {
       setError({});
     }
 
-    login(data).then((res) => {
-      if (res.status === 200) {
-        console.log("Login successful", res.user);
-      } else {
-        console.log("Login failed", res.message);
-      }
-    });
+    login(data)
+      .then((response) => {
+        localStorage.setItem("token", response.data.token);
+        toastConfig.success("login successful");
+        console.log("result", response.data.token);
+      })
+      .catch((error) => {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          toastConfig.error(`Error: ${error.response.data}`);
+        } else if (error.request) {
+          // The request was made but no response was received
+          toastConfig.error("No response from server");
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          toastConfig.error("Error", error.message);
+        }
+      });
   };
 
   return (
@@ -72,10 +85,7 @@ function Login() {
           </div>
 
           <div className="mt-3">
-            <ALink
-              text={"Don't have an account? Register"}
-              link={"/register"}
-            />
+            <ALink text={"Don't have an account? Register"} link={"/"} />
           </div>
         </form>
       </div>
