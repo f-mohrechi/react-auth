@@ -3,8 +3,10 @@ import { TextField, Button, Title, ALink } from "../components";
 import { login } from "../services/auth";
 import { FiLock, FiUser } from "react-icons/fi";
 import toastConfig from "../configs/ToastConfig";
+import { useNavigate } from "react-router";
 
 function Login() {
+  const navigate = useNavigate();
   const usernameRef = useRef();
   const passwordRef = useRef();
 
@@ -24,10 +26,6 @@ function Login() {
       }
     }
 
-    if (data.password && data.password.length < 8) {
-      errors["password"] = "Password must be at least 8 characters";
-    }
-
     if (Object.keys(errors).length > 0) {
       setError(errors);
       return;
@@ -37,9 +35,14 @@ function Login() {
 
     login(data)
       .then((response) => {
-        localStorage.setItem("token", response.data.token);
+        const data = response.data;
+        const user = response.config.data;
+        localStorage.setItem("token", data);
+        localStorage.setItem("user", user);
         toastConfig.success("login successful");
-        console.log("result", response.data.token);
+        navigate("/home");
+        console.log("result", data);
+        console.log("user", user);
       })
       .catch((error) => {
         if (error.response) {

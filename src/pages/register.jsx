@@ -2,8 +2,10 @@ import { useRef, useState } from "react";
 import { TextField, Button, Title, ALink } from "../components";
 import { register } from "../services/auth";
 import { FiMail, FiLock, FiUser } from "react-icons/fi";
+import { useNavigate } from "react-router";
 
 function Register() {
+  const navigate = useNavigate();
   const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -37,7 +39,10 @@ function Register() {
     }
 
     register(data).then((res) => {
-      console.log("result", res.config.data);
+      if (res.status === 200) {
+        navigate("/login");
+        console.log("result", res.config.data);
+      }
     });
   };
 
