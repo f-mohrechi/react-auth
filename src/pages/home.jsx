@@ -1,20 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import withAuth from "../helper/withAuth";
 
-export default function Home() {
-  const navigate = useNavigate();
-  const [user, setUser] = useState({});
-
-  useEffect(() => {
-    const user = localStorage.getItem("user");
-
-    if (user) {
-      setUser(JSON.parse(user));
-    } else {
-      navigate("/login");
-    }
-  }, []);
-
+const Home = ({ user }) => {
   return (
     <div>
       <p>home</p>
@@ -26,4 +12,6 @@ export default function Home() {
       )}
     </div>
   );
-}
+};
+
+export default withAuth(Home);
